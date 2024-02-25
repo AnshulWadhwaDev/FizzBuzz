@@ -1,6 +1,6 @@
 :root {
-  --primary-color: #1d5888;
-  --secondary-color: #32c3af;
+  --primary-color: #BA3B0A;
+  --secondary-color: #EA4A0D;
   --dark-color: #292929;
   --light-color: #e7e7e7;
 }
@@ -83,4 +83,44 @@ main>.container {
   left: 0;
   bottom: 0;
   width: 100%;
+}
+
+.bsicon {
+  color: purple;
+}
+
+.jsicon {
+  color: rgb(197, 197, 3);
+}
+
+.html5icon {
+  color:orangered;
+}
+
+.css3icon {
+  color: rgb(11,82,214);
+}
+
+.checklist>li i {
+  color: var(--secondary-color);
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+white-space: pre-wrap;
+word-break: break-all;
+word-wrap: break-word;
+}
+
+.Fizz {
+color: var(--primary-color);   
+}
+
+.Buzz {
+  color: darkgoldenrod;
+}
+
+.FizzBuzz {
+  color: brown;
+  font-weight: bold;
 }

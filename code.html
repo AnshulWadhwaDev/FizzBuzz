@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
   <head>
-    <title>App Name: A Coding Project By Anshul Wadhwa</title>
+    <title>FIZZBUZZ: A Coding Project By Anshul Wadhwa</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -30,7 +30,7 @@
     <!-- Nav Section -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="img/anshul-wadhwa-small.png" width="30" height="30" class="d-inline-block align-text-top"> APP NAME</a>
+        <a class="navbar-brand" href="#"><img src="img/anshul-wadhwa-small.png" width="30" height="30" class="d-inline-block align-text-top"> FIZZBUZZ</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -66,29 +66,156 @@
       </div>
     </nav>
 
-    <!-- Main Section -->
-    <main class="flex-shrink-0">
-      <div class="container py-5 px-3 mt-5">
-        <h2 class="border-1 border-bottom border-dark">The Code for APP NAME.</h2>    
+   <!-- Main Section-->
+   <main class="flex-shrink-0">
+    <div class="container py-5 px-5 mt-5">
+        <h2 class="border-1 border-bottom border-dark">The Code for  FizzBuzz</h2>
         <div class="row row-cols-1 row-cols-lg-2">
-                <div class="col-lg-8">
-                    <pre class="line-numbers">
-                        <code class="language-javascript">
-                            //Call Hello World
-                            function HelloWorld() {
-                            alert("Hello World");
+            <!-- Prism Code-->
+            <div class="col-lg-8">
+                <pre class="line-numbers">
+                    <code class="language-javascript">
+                        // CONTROLLER FUNCTION(S)
+                        // Get UI values
+                        function getValues() {
+                            let fizzValue = document.getElementById("fizzValue").value;
+                            let buzzValue = document.getElementById("buzzValue").value;
+                        
+                            // convert to Numbers
+                            fizzValue = Number(fizzValue);
+                            buzzValue = Number(buzzValue);
+                        
+                            // call generateNumbers for items list, 0 to 100;
+                            let numbers = generateNumbers(0,100);
+                        
+                            if (validateInput(fizzValue, buzzValue)) {
+                                // call calcFizzBuzz results
+                                let results = calculateFizzBuzz(fizzValue,buzzValue,numbers);
+                        
+                                // call displayResults
+                                displayResults(numbers, results);
                             }
-                        </code>
-                    </pre>
-                </div>
-                <div class="col-lg-4">
-                    <p>The Code is structured in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World"</p>
-                </div>
+                        }
+                        
+                        
+                        // LOGIC FUNCTION(S)
+                        // Generate number array
+                        function generateNumbers(sValue, eValue) {
+                            let numbers = [];
+                        
+                            for (let index = sValue; index <= eValue; index++) {
+                                numbers.push(index);
+                            }
+                        
+                            return numbers;
+                        }
+                        
+                        // Calc FizzBuzz
+                        function calculateFizzBuzz(fValue, bValue, numbersArray) {
+                            let results = [];
+                            let result = "";
+                        
+                            for (let index = 0; index < numbersArray.length; index++) {
+                                result = "";
+                        
+                                if (numbersArray[index] % fValue == 0) {
+                                    result += "Fizz";
+                                }
+                        
+                                if (numbersArray[index] % bValue == 0) {
+                                    result += "Buzz";
+                                }
+                        
+                                results.push(result);
+                            }
+                        
+                            return results;
+                        }
+                        
+                        
+                        // Validate input
+                        function validateInput(fValue, bValue) {
+                            let output = true;
+                        
+                            if (!Number.isInteger(fValue) || !Number.isInteger(bValue)) {
+                                alert("You must enter integers!")
+                                output = false;
+                            }
+                        
+                            if (fValue < 1 || fValue > 100) {
+                                alert("Enter a Fizz Value from 1 to 100!")
+                                output = false;
+                            }
+                        
+                            if (bValue < 1 || bValue > 100) {
+                                alert("Enter a Buzz Value from 1 to 100!")
+                                output = false;
+                            }
+                        
+                            return output
+                        }
+                        
+                        
+                        // VIEW FUNCTION(S)
+                        // Display results
+                        function displayResults(numbers, results) {
+                            // get the table body element from the page
+                            let tableBody = document.getElementById("results");
+                            // get the template row
+                            let templateRow = document.getElementById("fbTemplate");
+                            // clear the table first
+                            tableBody.innerHTML="";
+                        
+                            for (let index = 1; index < numbers.length; index++) {  
+                                let num = numbers[index];
+                                let result = results[index];
+                                let tableRow = document.importNode(templateRow.content, true);
+                                let rowCols = tableRow.querySelectorAll("td");
+                        
+                                rowCols[0].textContent = num;
+                                rowCols[1].textContent = result;
+                                // can't add an empty string as a class
+                                if (result != "") {
+                                    rowCols[1].classList.add(result);
+                                }
+                                
+                                tableBody.appendChild(tableRow);
+                            }
+                        }
+                    </code>
+                </pre>
             </div>
-      </div>
-    </main>
+            <!-- Code Description-->
+            <div class="col-lg-4">
+                <p>The Code is structured in five functions.</p>
+                <h5>getValues</h5>
+                <p>This function retrieves the user input from the page by utilising <strong>getElementById</strong>, and then converts the input to the Number type.
+                A list of numbers is generated using the <strong>generateNumbers</strong> function (default 0 to 100), which allows for future expansion and customisation
+                of the App. The input values are validated with the <strong>validateInput</strong> function, and if they are valid, the <strong>calculateFizzBuzz</strong>
+                 and <strong>displayResults</strong> functions are called, which generate the output of the App.</p>
+                <h5>generateNumbers</h5>
+                <p>The purpose of this function is to allow for a custom number range in a future expansion of the App (e.g. 500 to 600, or any user input).
+                    The function accepts to parameters: <strong>sValue</strong> and <strong>eValue</strong>. A 'for' loop is then used to generate an array of numbers based on the range set by the input parameters.
+                     This number array is then returned as the output of the function.</p>
+                <h5>calculateFizzBuzz</h5>
+                <p>calculateFizzBuzz takes in three parameters: <strong>fValue</strong>, <strong>bValue</strong>, and <strong>numbersArray</strong>. A 'for' loop iterates over the length of the input numbers array and performs 
+                    logic checks, using 'if' statements, on the array values to see if they are multiples of the Fizz or Buzz values (<strong>fValue</strong> and <strong>bValue</strong>).
+                 Where this is true, a corresponding string is pushed to a separate results array, in with the same index as the numbers array. This way, we can see both the numbers and 
+                the FizzBuzz values/multiples simultaneously, without overwriting the numbers when a multiple occurs.</p>
+                <h5>validateInput</h5>
+                <p>The validateInput function takes in two parameters, which are the user input Fizz and Buzz values. The function then uses 'if' statements to determine if 
+                    the values are not integers, and if they are not values between 1 and 100. If any of these statements are true, then the user is alerted with a corresponding message, and the function
+                     returns a boolean false value, to tell the program that the inputs are not validated.
+                </p>
+                <h5>displayResults</h5>
+                <p>displayResults takes in two parameters: <strong>numbers</strong> and <strong>results</strong>. The tables where the results are to be inserted and a template structure of 
+                 the HTML rows are retrieved from the document using <strong>getElementById</strong>. A 'for' loop iterates over the length of the numbers array, and inserts the values of the 
+                numbers array and results array to the table, using the <strong>appendChild</strong> function. The results (!= "") are also inserted to the class of the results table data using 
+                <strong>classList.add</strong>, where the results are styled using corresponding CSS classes.</p>
+            </div>
+        </div>
+    </div>
+</main>
 
    <!-- Footer Section -->
     <footer class="footer mt-auto py-3 sticky-footer">
